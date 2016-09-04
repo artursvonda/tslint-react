@@ -1,0 +1,73 @@
+let bar;
+let a = <div foo={ bar } />;
+
+a = <div foo="String value" />;
+
+a = <div foo={bar} />;
+             ~~~~~ [0]
+
+a = <div foo={bar } />;
+             ~~~~~~ [0]
+
+a = <div foo={ bar} />;
+             ~~~~~~ [0]
+
+a = <div foo={{ bar: baz }} />;
+             ~~~~~~~~~~~~~~ [0]
+
+a = <div foo={ {bar: baz} } />;
+
+a = <div foo={
+    bar
+  } />;
+
+a = <div>{ /* comment */ }</div>;
+
+a = <div>{/* comment */}</div>;
+         ~~~~~~~~~~~~~~~ [0]
+
+a = <div>{ bar/* comment */ }</div>;
+
+a = <div>{bar/* comment */}</div>;
+         ~~~~~~~~~~~~~~~~~~ [0]
+
+a = <div { ...bar } />;
+
+a = <div {...bar} />;
+         ~~~~~~~~ [0]
+
+a = <div foo={ bar } { ...baz } />;
+
+a = <div foo={bar} { ...baz } />;
+             ~~~~~ [0]
+
+a = <div foo={ bar } {...baz} />;
+                     ~~~~~~~~ [0]
+
+a = <div foo={bar} {...baz} />;
+             ~~~~~               [0]
+                   ~~~~~~~~      [0]
+
+a = <div foo={ bar }>{ bar }</div>;
+
+a = <div foo={bar}>{ bar }</div>;
+             ~~~~~ [0]
+
+a = <div foo={ bar }>{bar}</div>;
+                     ~~~~~ [0]
+
+a = <div foo={...bar}>Content</div>;
+             ~~~~~~~~ [0]
+
+a = <div foo={ ...bar }>Content</div>;
+
+a = <div>{...foo}</div>;
+         ~~~~~~~~ [0]
+
+a = <div>{ ...foo }</div>;
+
+a = <div { ...foo } {...bar} />;
+                    ~~~~~~~~ [0]
+
+
+[0]: Curly braces should always have spaces inside
